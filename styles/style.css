@@ -1,5 +1,291 @@
-/* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
-
 .page {
-  /* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
+  color: var(--text-color);
+  font-family: var(--font-family), "IBM Plex mono", monospace;
+  font-size: var(--font-size);
+  line-height: 1.3;
+  background-color: var(--background-color);
+  background-image: var(--background-image);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.decorated-zone {
+  position: relative;
+}
+
+.decorated-zone::before,
+.decorated-zone::after {
+  content: "";
+  position: absolute;
+  inline-size: 25px;
+  block-size: 25px;
+  color: var(--decoration-color);
+  pointer-events: none;
+}
+
+.decorated-zone::before {
+  inset-block-start: var(--spacing);
+  inset-inline-end: var(--spacing);
+  border-block-start: 1px solid;
+  border-inline-end: 1px solid;
+}
+
+.decorated-zone::after {
+  inset-block-end: var(--spacing);
+  inset-inline-start: var(--spacing);
+  border-block-end: 1px solid;
+  border-inline-start: 1px solid;
+}
+
+.header {
+  display: grid;
+  grid-template-rows: 1fr min-content 1fr;
+  min-block-size: 668px;
+  block-size: 100vh;
+  padding: var(--spacing);
+}
+
+.header__record {
+  position: absolute;
+  inset-block-start: var(--spacing);
+  inset-inline-end: calc(var(--spacing) + 9px);
+  display: var(--record-display);
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-color);
+  line-height: 25px;
+}
+
+.header__record::after {
+  content: "";
+  inline-size: 9px;
+  block-size: 9px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 4px 2px var(--accent-color);
+}
+
+.header__theme-menu {
+  align-self: center;
+  justify-self: end;
+}
+
+.header__theme-menu-list {
+  display: grid;
+  gap: 10px;
+}
+
+.header__theme-menu-button {
+  padding: 0 13px;
+  border: 1px solid transparent;
+  color: var(--decoration-color);
+  line-height: 22px;
+  text-transform: lowercase;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.header__theme-menu-button:hover {
+  border-color: var(--decoration-hover);
+}
+
+.header__theme-menu-button_active {
+  border-color: var(--decoration-color);
+  pointer-events: none;
+}
+
+.header__theme-menu-button:focus {
+  outline: none;
+}
+
+.header__theme-menu-button:focus-visible {
+  border-block-end-color: var(--decoration-color);
+}
+
+.header__title,
+.footer__title {
+  color: var(--heading-color);
+  font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+  font-weight: 700;
+  line-height: 0.825;
+}
+
+.header__title {
+  text-shadow: 4px 4px 0 var(--accent-color);
+}
+
+.header__description {
+  align-self: center;
+  font-weight: 700;
+}
+
+.title-decor {
+  color: var(--decor-text-color);
+  background-color: var(--accent-color);
+}
+
+.main {
+  display: grid;
+  gap: 50px;
+  margin-block: 40px;
+  padding-inline: var(--spacing);
+}
+
+.section {
+  display: grid;
+  gap: 20px;
+}
+
+.section__title {
+  color: var(--section-color);
+  font-size: inherit;
+  font-weight: 700;
+}
+
+.section__articles {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+  min-inline-size: 0;
+}
+
+.article__title,
+.gallery__title {
+  font-size: inherit;
+  font-weight: 700;
+}
+
+.article__title_regular {
+  font-weight: 400;
+}
+
+.article__text {
+  margin-block-start: 10px;
+}
+
+.article__link {
+  text-decoration: none;
+  text-shadow: 2px 2px 0 var(--accent-color);
+}
+
+.article__link:hover {
+  border-block-end: 1px solid currentColor;
+}
+
+.article__link:focus {
+  outline: none;
+}
+
+.article__link:focus-visible {
+  outline: 1px solid currentColor;
+}
+
+.gallery,
+.gallery__images {
+  display: grid;
+  gap: 10px;
+}
+
+.gallery__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footer {
+  display: grid;
+  place-items: center;
+  min-block-size: 668px;
+  block-size: 100vh;
+  padding: var(--spacing);
+}
+
+.footer__title {
+  text-shadow: 2px 2px 0 var(--accent-color);
+}
+
+@media (min-width: 768px) {
+  .header,
+  .footer {
+    min-block-size: 1024px;
+  }
+
+  .header__title,
+  .footer__title {
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  }
+
+  .header__title {
+    margin-inline-start: -20px;
+  }
+
+  .header__description {
+    justify-self: end;
+    inline-size: 50%;
+  }
+
+  .main {
+    gap: 80px;
+    margin-block: 60px;
+  }
+
+  .section_type_reasons,
+  .section_type_advice {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .section_type_distractions > .section__title {
+    inline-size: calc((100% - 40px) / 3);
+  }
+
+  .gallery,
+  .gallery__images {
+    gap: 20px;
+  }
+
+  .gallery__images {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery__image_type_sunset {
+    grid-column: span 2;
+  }
+
+  .gallery__image_type_ice,
+  .gallery__image_type_tape {
+    grid-row: span 2;
+  }
+
+  .gallery__image_type_street {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header,
+  .footer {
+    min-block-size: 768px;
+  }
+
+  .header__theme-menu {
+    align-self: start;
+    justify-self: center;
+  }
+
+  .header__theme-menu-list {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  .section_type_reasons,
+  .section_type_advice {
+    grid-template-columns: 1fr 2.06fr;
+  }
+
+  .section_type_distractions .section__articles {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
